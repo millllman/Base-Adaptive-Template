@@ -1,0 +1,48 @@
+/* Import */
+@import "variables";
+@import "mixin";
+@import "grid";
+@import "base";
+
+/*------------------------------------- Header */
+header {}
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------ Content */
+section {}
+
+.section-spacing {
+	height: 40px;
+	@include clearfix;
+}
+
+.box-spacing {
+	height: 20px;
+	@include clearfix;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------- Footer */
+footer {}
+/*-------------------------------------------  */
+

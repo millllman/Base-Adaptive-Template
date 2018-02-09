@@ -1,0 +1,87 @@
+/* Mixin */
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@mixin clearfix() {
+	clear: both;
+    &:before {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin box-shadow($params){
+    -moz-box-shadow: $params;
+    -webkit-box-shadow: $params;
+    box-shadow: $params;
+}
+
+@mixin border-radius($param){
+    -moz-border-radius: $param;
+    -webkit-border-radius: $param;
+    border-radius: $param;
+}
+
+@mixin font ($custom-size: 17, $custom-line-height: 20px, $custom-weight: normal) {
+	font: {
+		size: (#{$custom-size}px);
+		weight: $custom-weight;
+	}
+	line-height: (#{$custom-line-height}px);
+}
+
+@mixin title ($custom-padding: 20px 20px 20px, $custom-color: $main-title-color) {
+	padding: $custom-padding;
+	color: $custom-color;
+}
+
+@mixin abs ($custom-top: 0, $custom-left: 0, $custom-right: 0, $custom-bottom: 0, $custom-position: absolute) {
+	top: $custom-top;
+	left: $custom-left;
+	right: $custom-right;
+	bottom: $custom-bottom;
+	position: $custom-position;
+}
+
+@mixin link-decoration ($link-decoration: underline, $link-decoration-hover: underline) {
+	text-decoration: $link-decoration;
+	&:hover { text-decoration: $link-decoration-hover; }
+}
+
+@mixin link-color ($custom-color: $main-link-color, $custom-color-hover: $main-link-color-hover) {
+	color: $custom-color;
+	&:hover { color: $custom-color-hover; }
+}
+
+@mixin border ($border-color, $border-width, $border-style: solid) {
+	border: {
+		color: $border-color;
+		width: $border-width;
+		style: $border-style;
+	}
+}
+
+@mixin before {
+	&:before {
+		content: "";
+		display: inline-block;
+		@content;
+	}
+}
+@mixin after {
+	&:after {
+		content: "";
+		display: inline-block;
+		@content;
+	}
+}
+
+@mixin fa { font-family: $fa; }

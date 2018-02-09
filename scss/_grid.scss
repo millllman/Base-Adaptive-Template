@@ -1,0 +1,250 @@
+/* Grid System */
+@mixin widescreen			{@media screen and (min-width: ($widescreen-breakpoint)) {@content;}}
+@mixin desktop 				{@media screen and (min-width: $desktop-breakpoint) and (max-width: ($widescreen-breakpoint - 1)) {@content;}}
+@mixin laptop 				{@media screen and (min-width: $laptop-breakpoint) and (max-width: ($desktop-breakpoint - 1)) {@content;}}
+@mixin tablet 				{@media screen and (min-width: $tablet-breakpoint) and (max-width: ($laptop-breakpoint - 1)) {@content;}}
+@mixin mobile 				{@media screen and (min-width: $mobile-breakpoint) and (max-width: ($tablet-breakpoint - 1)) {@content;}}
+
+/* Mobile-Tablet, Tablet-Laptop, Laptop - Desktop, Desktop - Widescreen */
+@mixin desktop-widescreen 	{@media screen and (min-width: $desktop-breakpoint) and (max-width: $widescreen-breakpoint) {@content;}}
+@mixin laptop-desktop 		{@media screen and (min-width: $laptop-breakpoint) and (max-width: ($widescreen-breakpoint - 1)) {@content;}}
+@mixin tablet-laptop 		{@media screen and (min-width: $tablet-breakpoint) and (max-width: ($desktop-breakpoint - 1)) {@content;}}
+@mixin mobile-tablet 		{@media screen and (min-width: $mobile-breakpoint) and (max-width: ($laptop-breakpoint - 1)) {@content;}}
+
+/* Tablet, Laptop, Desktop MAXIMUM */
+@mixin desktop-max 			{@media screen and (max-width: ($widescreen-breakpoint - 1)) {@content;}}
+@mixin laptop-max   		{@media screen and (max-width: ($desktop-breakpoint - 1)) {@content;}}
+@mixin tablet-max   		{@media screen and (max-width: ($laptop-breakpoint - 1)) {@content;}}
+
+/* Tablet, Laptop, Desktop MINIMUM */
+@mixin desktop-min  		{@media screen and (min-width: $desktop-breakpoint) {@content;}}
+@mixin laptop-min 			{@media screen and (min-width: $laptop-breakpoint) {@content;}}
+@mixin tablet-min   		{@media screen and (min-width: $tablet-breakpoint) {@content;}}
+
+
+/* Container */
+.container {
+	width: $width-main;
+	margin: 0 auto;
+	position: relative;
+	@include clearfix;
+}
+
+.container-fluid {
+	min-width: 100%;
+	@include clearfix;
+}
+
+/* Classes */
+.row {
+	margin: 0 auto;
+	@include clearfix;
+}
+.row.row-minus {
+	margin-left: ($column-indent * -1);
+	margin-right: ($column-indent * -1);
+	@include mobile {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+.column {
+	width: 100%;
+	min-height: 1px;
+	float: left;
+	padding-left: $column-indent;
+	padding-right: $column-indent;
+}
+
+.clearfix { @include clearfix; }
+
+.fl { float: left;}
+.fr { float: right;}
+
+.no-p { padding: 0;}
+.no-pl { padding-left: 0;}
+.no-pr { padding-right: 0;}
+
+.show-widescreen,
+.show-desktop,
+.show-laptop,
+.show-tablet,
+.show-mobile { display: none !important;}
+
+/* Common Resolutions */
+.row.hd-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+.row.hd-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+.row.hd-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+.row.hd-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+.row.hd-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+.row.hd-1 > .column { width: $column-width-12;}
+
+.column.hd-1 { width: $column-width-1;}
+.column.hd-2 { width: $column-width-2;}
+.column.hd-3 { width: $column-width-3;}
+.column.hd-4 { width: $column-width-4;}
+.column.hd-5 { width: $column-width-5;}
+.column.hd-6 { width: $column-width-6;}
+.column.hd-7 { width: $column-width-7;}
+.column.hd-8 { width: $column-width-8;}
+.column.hd-9 { width: $column-width-9;}
+.column.hd-10 { width: $column-width-10;}
+.column.hd-11 { width: $column-width-11;}
+.column.hd-12 { width: $column-width-12;}
+
+
+/* Custom Column Width */
+
+@include widescreen {
+	.container { width: $width-main;}
+
+	.row.ws-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+	.row.ws-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+	.row.ws-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+	.row.ws-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+	.row.ws-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+	.row.ws-1 > .column {  width: $column-width-12;}
+
+	.column.ws-1 { width: $column-width-1;}
+	.column.ws-2 { width: $column-width-2;}
+	.column.ws-3 { width: $column-width-3;}
+	.column.ws-4 { width: $column-width-4;}
+	.column.ws-5 { width: $column-width-5;}
+	.column.ws-6 { width: $column-width-6;}
+	.column.ws-7 { width: $column-width-7;}
+	.column.ws-8 { width: $column-width-8;}
+	.column.ws-9 { width: $column-width-9;}
+	.column.ws-10 { width: $column-width-10;}
+	.column.ws-11 { width: $column-width-11;}
+	.column.ws-12 { width: $column-width-12;}
+
+	.show-widescreen { display: block !important;}
+	.hide-widescreen { display: none !important;}
+	.no-p-w { padding: 0;}
+	.no-pl-w { padding-left: 0;}
+	.no-pr-w { padding-right: 0;}
+}
+
+@include desktop {
+	.container { width: $width-desktop;}
+
+	.row.lg-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+	.row.lg-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+	.row.lg-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+	.row.lg-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+	.row.lg-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+	.row.lg-1 > .column {  width: $column-width-12;}
+
+	.column.lg-1 { width: $column-width-1;}
+	.column.lg-2 { width: $column-width-2;}
+	.column.lg-3 { width: $column-width-3;}
+	.column.lg-4 { width: $column-width-4;}
+	.column.lg-5 { width: $column-width-5;}
+	.column.lg-6 { width: $column-width-6;}
+	.column.lg-7 { width: $column-width-7;}
+	.column.lg-8 { width: $column-width-8;}
+	.column.lg-9 { width: $column-width-9;}
+	.column.lg-10 { width: $column-width-10;}
+	.column.lg-11 { width: $column-width-11;}
+	.column.lg-12 { width: $column-width-12;}
+
+	.show-desktop { display: block !important;}
+	.hide-desktop { display: none !important;}
+	.no-p-d { padding: 0;}
+	.no-pl-d { padding-left: 0;}
+	.no-pr-d { padding-right: 0;}
+}
+
+@include laptop {
+	.container { width: $width-laptop;}
+
+	.row.md-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+	.row.md-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+	.row.md-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+	.row.md-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+	.row.md-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+	.row.md-1 > .column {  width: $column-width-12;}
+
+	.column.md-1 { width: $column-width-1;}
+	.column.md-2 { width: $column-width-2;}
+	.column.md-3 { width: $column-width-3;}
+	.column.md-4 { width: $column-width-4;}
+	.column.md-5 { width: $column-width-5;}
+	.column.md-6 { width: $column-width-6;}
+	.column.md-7 { width: $column-width-7;}
+	.column.md-8 { width: $column-width-8;}
+	.column.md-9 { width: $column-width-9;}
+	.column.md-10 { width: $column-width-10;}
+	.column.md-11 { width: $column-width-11;}
+	.column.md-12 { width: $column-width-12;}
+
+	.show-laptop { display: block !important;}
+	.hide-laptop { display: none !important;}
+	.no-p-l { padding: 0;}
+	.no-pl-l { padding-left: 0;}
+	.no-pr-l { padding-right: 0;}
+}
+
+@include tablet {
+	.container { width: $width-tablet;}
+
+	.row.sm-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+	.row.sm-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+	.row.sm-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+	.row.sm-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+	.row.sm-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+	.row.sm-1 > .column {  width: $column-width-12;}
+
+	.column.sm-1 { width: $column-width-1;}
+	.column.sm-2 { width: $column-width-2;}
+	.column.sm-3 { width: $column-width-3;}
+	.column.sm-4 { width: $column-width-4;}
+	.column.sm-5 { width: $column-width-5;}
+	.column.sm-6 { width: $column-width-6;}
+	.column.sm-7 { width: $column-width-7;}
+	.column.sm-8 { width: $column-width-8;}
+	.column.sm-9 { width: $column-width-9;}
+	.column.sm-10 { width: $column-width-10;}
+	.column.sm-11 { width: $column-width-11;}
+	.column.sm-12 { width: $column-width-12;}
+
+	.show-tablet { display: block !important;}
+	.hide-tablet { display: none !important;}
+	.no-p-t { padding: 0;}
+	.no-pl-t { padding-left: 0;}
+	.no-pr-t { padding-right: 0;}
+}
+
+@include mobile {
+	.container { width: $width-mobile;}
+
+	.row.xs-6 > .column { width: $column-width-2; &:nth-child(6n+1) { clear: left; }}
+	.row.xs-5 > .column { width: $column-width-five; &:nth-child(5n+1) { clear: left; }}
+	.row.xs-4 > .column { width: $column-width-3; &:nth-child(4n+1) { clear: left; }}
+	.row.xs-3 > .column { width: $column-width-4; &:nth-child(3n+1) { clear: left; }}
+	.row.xs-2 > .column { width: $column-width-6; &:nth-child(2n+1) { clear: left; }}
+	.row.xs-1 > .column {  width: $column-width-12;}
+
+	.column.xs-1 { width: $column-width-1;}
+	.column.xs-2 { width: $column-width-2;}
+	.column.xs-3 { width: $column-width-3;}
+	.column.xs-4 { width: $column-width-4;}
+	.column.xs-5 { width: $column-width-5;}
+	.column.xs-6 { width: $column-width-6;}
+	.column.xs-7 { width: $column-width-7;}
+	.column.xs-8 { width: $column-width-8;}
+	.column.xs-9 { width: $column-width-9;}
+	.column.xs-10 { width: $column-width-10;}
+	.column.xs-11 { width: $column-width-11;}
+	.column.xs-12 { width: $column-width-12;}
+
+	.show-mobile { display: block !important;}
+	.hide-mobile { display: none !important;}
+	.no-p-m { padding: 0;}
+	.no-pl-m { padding-left: 0;}
+	.no-pr-m { padding-right: 0;}
+}
+
+
+
