@@ -15,6 +15,10 @@ body {
 	color: $main-color;
 	background: $body-color;
 	font: #{$main-font-size}/#{$main-line-height} $main-font-family;
+	&.fade {
+		padding-right: 17px;
+		overflow: hidden;
+	}
 }
 
 ::selection { color: #fff; background: #f07f20; }
@@ -24,6 +28,7 @@ p {
 	padding: 18px 0 0;
 	margin: 0;
 }
+em { font-style: normal; }
 
 ul {
 	padding: 0;
@@ -40,14 +45,10 @@ h1 {
 }
 
 a {
-	color: $main-link-color;
-	text-decoration: none;
 	transition: .2s ease-in-out;
 	outline: none;
-	&:hover {
-		color: $main-link-color-hover;
-		text-decoration: none;
-	}
+	@include link-color ($main-link-color,$main-link-color-hover);
+	@include link-decoration (uu);
 }
 
 img {
@@ -88,61 +89,141 @@ input[type="password"] {
 	text-align: center;
 }
 
+/*---------------------------------------------------------------- Buttons */
 .btn {
-	padding: 5px 15px;
+	padding: 7px 15px;
 	display: inline-block;
-	color: #fff;
+	color: #212121;
 	text-align: center;
-	background: #3090cf;
-	@include font (16,30,bold);
-	@include link-decoration (none,none);
-	@include border-radius (4px);
-	@include border (#3090cf,0px);
-	&.btn-block {
-		display: block;
-	}
+	background-color: #e6e6e6;
+	transition: none;
+	@include font (15,20);
+	@include link-decoration (nn);
+	@include border-radius (3px);
+	@include border (transparent,0px);
 	&:hover {
+		color: #212121;
+		background-image: linear-gradient(to bottom,#e6e6e6,#bdbdbd);
+	}
+	&:focus { box-shadow: inset 0 0 7px #929292, inset 0 0 0 1px #9d9d9d; }
+	&.btn-success {
 		color: #fff;
-		background: #196da5;
+		background: #1cb841;
+		&:hover {
+			color: #fff;
+			background-image: linear-gradient(to bottom,#1cb841,#129d33);
+		}
+		&:focus { box-shadow: inset 0 0 7px #5d5d5d, inset 0 0 0 1px #0f912e; }
+	}
+
+	&.btn-alert {
+		color: #fff;
+		background: #d54848;
+		&:hover {
+			color: #fff;
+			background-image: linear-gradient(to bottom,#d54848,#b13a3a);
+		}
+		&:focus { box-shadow: inset 0 0 7px #5d5d5d, inset 0 0 0 1px #902222; }
+	}
+
+	&.btn-warning {
+		color: #fff;
+		background: #e87f1e;
+		&:hover {
+			color: #fff;
+			background-image: linear-gradient(to bottom,#f69942,#cd7422);
+		}
+		&:focus { box-shadow: inset 0 0 7px #5d5d5d, inset 0 0 0 1px #b66f2e; }
+	}
+
+	&.btn-primary {
+		color: #fff;
+		background: #36a0c1;
+		&:hover {
+			color: #fff;
+			background-image: linear-gradient(to bottom,#36a0c1,#2a84a0);
+		}
+		&:focus { box-shadow: inset 0 0 7px #5d5d5d, inset 0 0 0 1px #1e6980; }
+	}
+
+	&.btn-link {
+		background: none;
+		@include link-color ($main-link-color,$main-link-color-hover);
+		&:focus { @include box-shadow (inset 0 0 12px #ccc); }
+	}
+	&.btn-block { display: block; }
+	& > i.fa { margin-right: 7px; }
+}
+
+button {
+	&.btn {
+		cursor: pointer;
+		&.btn-block { width: 100%; }
 	}
 }
 
-/* Popup */
+
+/*---------------------------------------------------------------- Popup */
 .fadeScreen {
 	display: none;
+	background: rgba(0,0,0,.75);
+	@include abs (0,0,0,0,fixed);
+}
+.fadeScreenGlobal {
+	display: none;
 	z-index: 101;
-	background: rgba(0,0,0, 0.5);
+	background: rgba(0,0,0,.75);
+	@include abs (0,0,0,0,fixed);
+}
+
+.popup-wrap {
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: none;
+	z-index: 105;
 	@include abs (0,0,0,0,fixed);
 }
 
 .popup-box {
-	width: 480px;
-	padding: 35px 20px 20px;
-	text-align: center;
+	width: 450px;
+	padding: 30px 24px 45px;
+	margin: 7% auto 30px;
 	background: #fff;
-	display: none;
-	transform: translate(-50%,-50%);
-	z-index: 100000;
-	@include abs (50%,50%,auto,auto,fixed);
+	position: relative;
+	/*transform: translate(-50%,0%);*/
+	/*@include abs (10%,50%,auto,auto,relative);*/
+	@include font (14,17);
 	@include border-radius (5px);
+	@include box-shadow (0 0 15px #000);
+
 	&.open { animation: popup-open .3s; }
 	&.close { animation: popup-close .5s; }
-	@include tablet-max {
+
+	@include media(xs) {
 		width: auto;
-		transform: translate(0%,-50%);
-		@include abs (50%,15px,15px,auto,fixed);
+		margin: 7% 15px 30px;
+		/*transform: translate(0%,-50%);*/
+		/*@include abs (50%,15px,15px,auto,fixed);*/
+	}
+	.title {
+		padding: 0 0 18px;
+		text-align: center;
+		@include font (25,27,bold);
 	}
 }
 
 .popup-close {
-	color: #ff923d;
-	cursor: pointer;
-	@include font (35,35);
-	@include abs (-45px,auto,-40px,auto);
-	&:hover { opacity: 0.7; }
+	&.fa {
+		color: #000;
+		opacity: 0.5;
+		cursor: pointer;
+		@include font (20,20);
+		@include abs (12px,auto,15px,auto);
+		&:hover { opacity: 1; }
+	}
 }
 
-/* Button Toggle */
+/*---------------------------------------------------------- Button Toggle */
 .button-toggle {
 	display: inline-block;
 	label {
@@ -195,31 +276,34 @@ input[type="password"] {
 	background: rgba(0,0,0, 0.7);
 	position: relative;
 	z-index: 3;
-	/*transition: .2s ease-in-out;*/
+	transition: .2s ease-in-out;
 	@include font (17,25);
 	em {
 		height: 3px;
 		display: block;
 		font-style: normal;
 		background: #fff;
+		transition: .2s ease-in-out;
 		@include font (17,29);
 		@include border-radius (2px);
 	}
 	@include before {
 		height: 3px;
 		background: #fff;
+		transition: .2s ease-in-out;
 		@include abs (17px,5px,5px,auto);
 		@include border-radius (2px);
 	}
 	@include after {
 		height: 3px;
 		background: #fff;
+		transition: .2s ease-in-out;
 		@include abs (27px,5px,5px,auto);
 		@include border-radius (2px);
 	}
 	&:hover { opacity: 0.7; }
 	&.open {
-		em { display: none; }
+		em { margin-top: 7px; opacity: 0; }
 		&:before,
 		&:after {
 			top: 17px;
@@ -227,44 +311,45 @@ input[type="password"] {
 			right: 0px;
 			background: $red;
 		}
-		&:before { transform: rotate(-138deg); }
-		&:after { transform: rotate(138deg); }
+		&:before { transform: rotate(45deg); }
+		&:after { transform: rotate(-45deg); }
 	}
-	@include tablet-max { display: inline-block; }
+	@include media(md-max) { display: inline-block; }
 }
 
 .mobile-dropmenu__box {
-	width: 250px;
-	padding: 10px 0 0;
-	max-width: 100%;
-	background: #333;
-	overflow-y: auto;
-	transition: .3s ease-in-out;
-	display: none;
-	z-index: 99999;
-	@include abs (0,-250px,auto,0,fixed);
-	@include before {
-		width: 1px;
-		display: block;
-		background: rgba(0,0,0,0.6);
-		@include abs (0,auto);
-		@include box-shadow (0 0 5px 2px rgba(0,0,0,0.6));
-	}
-	li {
-		@include font (15,20);
-		@include border (rgba(255,255,255,.05),0 0 1px);
-		a {
-			padding: 10px 15px;
+	@include media(md-max) {
+		width: 250px;
+		padding: 10px 0 0;
+		max-width: 100%;
+		background: #333;
+		overflow-y: auto;
+		transition: .3s ease-in-out;
+		display: none;
+		z-index: 99999;
+		@include abs (0,-250px,auto,0,fixed);
+		@include before {
+			width: 1px;
 			display: block;
-			text-shadow: 0 1px 0 rgba(0,0,0,.5);
-			@include link-color (#ccc,#fff);
-			@include font (15,20);
-			@include border (rgba(0,0,0,.3),0 0 1px);
-			&:hover { background: #404040; }
+			background: rgba(0,0,0,0.6);
+			@include abs (0,auto);
+			@include box-shadow (0 0 5px 2px rgba(0,0,0,0.6));
 		}
+		li {
+			@include font (15,20);
+			@include border (rgba(255,255,255,.05),0 0 1px);
+			a {
+				padding: 10px 15px;
+				display: block;
+				text-shadow: 0 1px 0 rgba(0,0,0,.5);
+				@include link-color (#ccc,#fff);
+				@include font (15,20);
+				@include border (rgba(0,0,0,.3),0 0 1px);
+				&:hover { background: #404040; }
+			}
+		}
+		&.open { display: block; left: 0; }
 	}
-	&.open { display: block; left: 0; }
-	@include tablet-max {}
 }
 
 .md-body {
@@ -276,33 +361,16 @@ input[type="password"] {
 	}
 }
 
-/*-------------------------------------------------- Mobile Drop Menu END */
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*-------------------------------------------------------- Custom Animate */
 @keyframes popup-open {
-	from { top: 90%; opacity: 0; }
-	to { top: 50%; opacity: 1; }
+	from { top: -10%; opacity: 0; }
+	to { top: 0; opacity: 1; }
 }
 
 @keyframes popup-close {
-	from { top: 50%; opacity: 1; }
-	to { top: -20%; opacity: 0; }
+	from { top: 0; opacity: 1; }
+	to { top: 50%; opacity: 0; }
 }
-
-
-
 
 
 

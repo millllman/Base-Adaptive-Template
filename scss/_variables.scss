@@ -5,17 +5,18 @@ $main-line-height:		24px;
 $main-font-family:		'PT Sans Narrow', sans-serif;
 $main-link-color:		#05bc9c;
 $main-link-color-hover:	#3090cf;
-$main-title-color:		#05bc9c;
+$main-title-color:		#111;
 $body-color:			#141415;
 $section-color:			#05bc9c;
 $border-color:			#c2c2c2;
 
 $rc:					'Roboto Condensed', sans-serif;
-$fa:					'Font Awesome\ 5 Free';
+$fa:					'FontAwesome';
 $red:					#dd300e;
 
 //----------------------grid--------------------
 $column-indent: 		.9375rem;
+$column-small-indent: 	5px;
 
 $width-main: 			1200px;
 $width-desktop:			950px;

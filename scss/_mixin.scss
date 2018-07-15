@@ -51,9 +51,23 @@
 	position: $custom-position;
 }
 
-@mixin link-decoration ($link-decoration: underline, $link-decoration-hover: underline) {
-	text-decoration: $link-decoration;
-	&:hover { text-decoration: $link-decoration-hover; }
+@mixin link-decoration ($decoration) {
+	@if $decoration == nu {
+		text-decoration: none;
+		&:hover { text-decoration: underline; }	
+	}
+	@else if $decoration == un {
+		text-decoration: underline;
+		&:hover { text-decoration: none; }
+	}
+	@else if $decoration == nn {
+		text-decoration: none;
+		&:hover { text-decoration: none; }
+	}
+	@else {
+		text-decoration: underline;
+		&:hover { text-decoration: underline; }
+	}	
 }
 
 @mixin link-color ($custom-color: $main-link-color, $custom-color-hover: $main-link-color-hover) {
@@ -85,3 +99,10 @@
 }
 
 @mixin fa { font-family: $fa; }
+
+@mixin gutter-content {
+	@include media(sm-max) {
+		padding-left: $column-indent;
+		padding-right: $column-indent;
+	}
+}
